@@ -61,6 +61,38 @@ class GamePanel : JPanel() {
             e.printStackTrace()
         }
     }
+    override fun processKeyEvent(e: KeyEvent) {
+
+        if (e.id == KeyEvent.KEY_PRESSED) {
+
+            println("キーが押されました!")
+
+            if (e.keyCode == KeyEvent.VK_D) {
+
+                playerX += 32
+
+                repaint()
+            }
+        }
+        if (e.keyCode == KeyEvent.VK_A) {
+
+            playerX -= 32
+
+            repaint()
+        }
+        if (e.keyCode == KeyEvent.VK_W) {
+
+            playerY -= 32
+
+            repaint()
+        }
+        if (e.keyCode == KeyEvent.VK_S) {
+
+            playerY += 32
+
+            repaint()
+        }
+    }
 
     override fun paintComponent(g: Graphics) {
 
