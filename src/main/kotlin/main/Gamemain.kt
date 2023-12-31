@@ -1,4 +1,0 @@
-package main
-
-object Gamemain {
-}
