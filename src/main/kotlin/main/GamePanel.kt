@@ -46,7 +46,7 @@ class GamePanel : JPanel() {
 
         try {
 
-            val file = File("C:\\Users\\meteo\\IdeaProjects\\Swing_rpg\\res\\player.png")
+            val file = File("C:\\Users\\meteo\\IdeaProjects\\Kotlin_2D_rpg\\res\\player.png")
 
             player.setDrawPlayer(ImageIO.read(file))
 
