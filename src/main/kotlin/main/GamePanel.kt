@@ -1,11 +1,11 @@
 package main
 
+import player.Player
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Font
 import java.awt.Graphics
 import java.awt.event.KeyEvent
-import java.awt.image.BufferedImage
 import java.io.File
 import java.io.IOException
 import javax.imageio.ImageIO
@@ -28,11 +28,7 @@ class GamePanel : JPanel() {
 
     private val screenHeight: Int = tileSize * maxScreenCol
 
-    private lateinit var drawPlayer: BufferedImage
-
-    private var playerX = 0
-
-    private var playerY = 0
+    private val player = Player(this)
 
     init {
 
@@ -52,15 +48,16 @@ class GamePanel : JPanel() {
 
             val file = File("C:\\Users\\meteo\\IdeaProjects\\Swing_rpg\\res\\player.png")
 
-            drawPlayer = ImageIO.read(file)
+            player.setDrawPlayer(ImageIO.read(file))
 
-            drawPlayer = drawPlayer.getSubimage(0, 0, 32, 32)
+            player.setDrawPlayer(player.getDrawPlayer().getSubimage(0, 0, 32, 32))
 
         } catch (e: IOException) {
 
             e.printStackTrace()
         }
     }
+
     override fun processKeyEvent(e: KeyEvent) {
 
         if (e.id == KeyEvent.KEY_PRESSED) {
@@ -69,26 +66,26 @@ class GamePanel : JPanel() {
 
             if (e.keyCode == KeyEvent.VK_D) {
 
-                playerX += 32
+                player.setPlayerX(player.getPlayerX() + 32)
 
                 repaint()
             }
         }
         if (e.keyCode == KeyEvent.VK_A) {
 
-            playerX -= 32
+            player.setPlayerX(player.getPlayerX() - 32)
 
             repaint()
         }
         if (e.keyCode == KeyEvent.VK_W) {
 
-            playerY -= 32
+            player.setPlayerY(player.getPlayerY() - 32)
 
             repaint()
         }
         if (e.keyCode == KeyEvent.VK_S) {
 
-            playerY += 32
+            player.setPlayerY(player.getPlayerY() + 32)
 
             repaint()
         }
@@ -104,6 +101,6 @@ class GamePanel : JPanel() {
 
         g.fillRect(100, 100, 500, 300)
 
-        g.drawImage(drawPlayer, playerX, playerY, null)
+        g.drawImage(player.getDrawPlayer(), player.getPlayerX(), player.getPlayerY(), null)
     }
 }
