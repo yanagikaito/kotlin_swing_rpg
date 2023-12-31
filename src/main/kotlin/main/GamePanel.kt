@@ -6,7 +6,6 @@ import java.awt.Dimension
 import java.awt.Font
 import java.awt.Graphics
 import java.awt.event.KeyEvent
-import java.io.File
 import java.io.IOException
 import javax.imageio.ImageIO
 import javax.swing.JLabel
@@ -44,18 +43,7 @@ class GamePanel : JPanel() {
 
         add(jl)
 
-        try {
-
-            val file = File("C:\\Users\\meteo\\IdeaProjects\\Kotlin_2D_rpg\\res\\player.png")
-
-            player.setDrawPlayer(ImageIO.read(file))
-
-            player.setDrawPlayer(player.getDrawPlayer().getSubimage(0, 0, 32, 32))
-
-        } catch (e: IOException) {
-
-            e.printStackTrace()
-        }
+        player.getPlayerImage()
     }
 
     override fun processKeyEvent(e: KeyEvent) {
