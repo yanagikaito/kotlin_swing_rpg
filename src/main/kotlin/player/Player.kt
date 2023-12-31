@@ -2,6 +2,8 @@ package player
 
 import main.GamePanel
 import java.awt.image.BufferedImage
+import java.io.IOException
+import javax.imageio.ImageIO
 
 class Player(private var gamePanel: GamePanel) {
 
@@ -14,6 +16,25 @@ class Player(private var gamePanel: GamePanel) {
     init {
 
         this.gamePanel = gamePanel
+    }
+
+    fun getPlayerImage() {
+
+        try {
+
+            setDrawPlayer(
+                ImageIO.read(
+                    javaClass.getClassLoader()
+                        .getResourceAsStream("images/player.png")
+                )
+            )
+
+            setDrawPlayer(getDrawPlayer().getSubimage(0, 0, 32, 32))
+
+        } catch (e: IOException) {
+
+            e.printStackTrace()
+        }
     }
 
     fun getDrawPlayer(): BufferedImage {
