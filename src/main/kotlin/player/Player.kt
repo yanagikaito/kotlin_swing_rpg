@@ -1,6 +1,7 @@
 package player
 
 import main.GamePanel
+import java.awt.event.KeyEvent
 import java.awt.image.BufferedImage
 import java.io.IOException
 import javax.imageio.ImageIO
@@ -34,6 +35,29 @@ class Player(private var gamePanel: GamePanel) {
         } catch (e: IOException) {
 
             e.printStackTrace()
+        }
+    }
+
+    fun move(kc: Int) {
+
+        if (kc == KeyEvent.VK_D) {
+
+            setPlayerX(getPlayerX() + 32)
+        }
+
+        if (kc == KeyEvent.VK_A) {
+
+            setPlayerX(getPlayerX() - 32)
+        }
+
+        if (kc == KeyEvent.VK_W) {
+
+            setPlayerY(getPlayerY() - 32)
+        }
+
+        if (kc == KeyEvent.VK_S) {
+
+            setPlayerY(getPlayerY() + 32)
         }
     }
 
