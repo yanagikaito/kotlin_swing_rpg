@@ -6,8 +6,6 @@ import java.awt.Dimension
 import java.awt.Font
 import java.awt.Graphics
 import java.awt.event.KeyEvent
-import java.io.IOException
-import javax.imageio.ImageIO
 import javax.swing.JLabel
 import javax.swing.JPanel
 
@@ -29,6 +27,8 @@ class GamePanel : JPanel() {
 
     private val player = Player(this)
 
+    private val keyHandler = KeyHandler(this)
+
     init {
 
         this.preferredSize = Dimension(screenWidth, screenHeight)
@@ -44,40 +44,17 @@ class GamePanel : JPanel() {
         add(jl)
 
         player.getPlayerImage()
+
+        addKeyListener(keyHandler)
     }
 
     override fun processKeyEvent(e: KeyEvent) {
 
-        if (e.id == KeyEvent.KEY_PRESSED) {
+        player.move(e.keyCode)
 
-            println("キーが押されました!")
-
-            if (e.keyCode == KeyEvent.VK_D) {
-
-                player.setPlayerX(player.getPlayerX() + 32)
-
-                repaint()
-            }
-        }
-        if (e.keyCode == KeyEvent.VK_A) {
-
-            player.setPlayerX(player.getPlayerX() - 32)
-
-            repaint()
-        }
-        if (e.keyCode == KeyEvent.VK_W) {
-
-            player.setPlayerY(player.getPlayerY() - 32)
-
-            repaint()
-        }
-        if (e.keyCode == KeyEvent.VK_S) {
-
-            player.setPlayerY(player.getPlayerY() + 32)
-
-            repaint()
-        }
+        repaint()
     }
+
 
     override fun paintComponent(g: Graphics) {
 
