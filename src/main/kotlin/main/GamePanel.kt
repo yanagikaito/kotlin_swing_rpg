@@ -1,10 +1,7 @@
 package main
 
 import player.Player
-import java.awt.Color
-import java.awt.Dimension
-import java.awt.Font
-import java.awt.Graphics
+import java.awt.*
 import java.awt.event.KeyEvent
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -56,16 +53,18 @@ class GamePanel : JPanel() {
     }
 
 
-    override fun paintComponent(g: Graphics) {
+    override fun paintComponent(graphics: Graphics) {
 
-        super.paintComponent(g)
+        super.paintComponent(graphics)
 
         requestFocusInWindow()
 
-        g.color = Color.ORANGE
+        val graphics2D = graphics as Graphics2D
 
-        g.fillRect(100, 100, 500, 300)
+        graphics2D.color = Color.ORANGE
 
-        g.drawImage(player.getDrawPlayer(), player.getPlayerX(), player.getPlayerY(), null)
+        graphics2D.fillRect(100, 100, 500, 300)
+
+        graphics2D.drawImage(player.getDrawPlayer(), player.getPlayerX(), player.getPlayerY(), null)
     }
 }
