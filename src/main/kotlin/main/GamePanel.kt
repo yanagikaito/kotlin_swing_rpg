@@ -26,6 +26,8 @@ class GamePanel : JPanel() {
 
     private val keyHandler = KeyHandler(this)
 
+    private val playerHP = 25
+
     init {
 
         this.preferredSize = Dimension(screenWidth, screenHeight)
@@ -66,5 +68,11 @@ class GamePanel : JPanel() {
         graphics2D.fillRect(100, 100, 500, 300)
 
         graphics2D.drawImage(player.getDrawPlayer(), player.getPlayerX(), player.getPlayerY(), null)
+
+        graphics2D.color = Color.WHITE
+
+        graphics2D.font = graphics2D.getFont().deriveFont(Font.PLAIN, 23f)
+
+        graphics2D.drawString("HP$playerHP", 34, 34)
     }
 }
