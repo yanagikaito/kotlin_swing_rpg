@@ -69,10 +69,23 @@ class GamePanel : JPanel() {
 
         graphics2D.drawImage(player.getDrawPlayer(), player.getPlayerX(), player.getPlayerY(), null)
 
+        graphics2D.color = Color(0, 0, 0, 200)
+
+        graphics2D.fillRoundRect(0, 0, 960, 50, 0, 0)
+
+        // RGBの白色の番号
+        graphics2D.color = Color(255, 255, 255)
+
+        graphics2D.setColor(graphics2D.color)
+
+        graphics2D.setStroke(BasicStroke(5f))
+
+        graphics2D.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25)
+
         graphics2D.color = Color.WHITE
 
         graphics2D.font = graphics2D.getFont().deriveFont(Font.PLAIN, 23f)
 
-        graphics2D.drawString("HP$playerHP", 34, 34)
+        graphics2D.drawString("HP$playerHP", 36, 36)
     }
 }

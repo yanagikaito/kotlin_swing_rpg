@@ -10,9 +10,9 @@ class Player(private var gamePanel: GamePanel) {
 
     private lateinit var drawPlayer: BufferedImage
 
-    private var playerX: Int = 0
+    private var playerX: Int = 100
 
-    private var playerY: Int = 0
+    private var playerY: Int = 100
 
     init {
 
