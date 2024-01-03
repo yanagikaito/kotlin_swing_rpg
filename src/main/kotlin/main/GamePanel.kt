@@ -26,7 +26,7 @@ class GamePanel : JPanel() {
 
     private val keyHandler = KeyHandler(this)
 
-    private val playerHP = 25
+    private var playerHP = 25
 
     init {
 
@@ -45,11 +45,19 @@ class GamePanel : JPanel() {
         player.getPlayerImage()
 
         addKeyListener(keyHandler)
+
     }
 
     override fun processKeyEvent(e: KeyEvent) {
 
         player.move(e.keyCode)
+
+        playerHP--
+
+        if (playerHP <= 0) {
+
+
+        }
 
         repaint()
     }
