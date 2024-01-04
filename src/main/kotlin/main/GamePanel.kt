@@ -1,99 +1,306 @@
-package main
-
-import player.Player
-import java.awt.*
+import java.awt.Color
+import java.awt.Dimension
+import java.awt.Graphics
+import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
-import javax.swing.JLabel
+import java.awt.image.BufferedImage
+import java.io.IOException
+import java.util.*
+import javax.imageio.ImageIO
 import javax.swing.JPanel
+
+/**
+ * ゲームパネル
+ */
 
 class GamePanel : JPanel() {
 
-    private val originalTileSize = 16
+    private val originalSize = 16
 
     private val scale = 3
 
-    private val tileSize = originalTileSize * scale
+    private val tileSize = scale * originalSize
 
-    private val maxScreenRow = 16
+    private val maxScreenCol = 16
 
-    private val maxScreenCol = 12
+    private val maxScreenRow = 15
 
-    private val screenWidth = tileSize * maxScreenRow
+    /**
+     * 768 ピクセル
+     */
 
-    private val screenHeight: Int = tileSize * maxScreenCol
+    private val screenWidth = tileSize * maxScreenCol
 
-    private val player = Player(this)
+    /**
+     * 720 ピクセル
+     */
 
-    private val keyHandler = KeyHandler(this)
+    private val screenHeight = tileSize * maxScreenRow
 
-    private var playerHP = 25
+
+    /**
+     * キー入力を処理するアダプター
+     */
+
+    private var keyAdapter: KeyAdapter? = null
+
+    /**
+     * キー入力の状態を格納する配列
+     */
+
+    private var keyPressTbl: BooleanArray? = null
+
+    /**
+     * X座標,Y座標
+     */
+
+    private var x = 0
+
+    private var y = 0
+
+    /**
+     * 速度
+     */
+
+    private var mx = 0
+
+    /**
+     * キャラクターの画像
+     */
+
+    private var imageShips: Array<BufferedImage?>? = null
+
+    /**
+     * キャラクターの向き
+     */
+
+    private var playerDirection = 0
+
+    var playerGra: BufferedImage? = null
+
+    var pShift = 0
+
+    /**
+     * タイマー
+     */
+
+    private var timerThis: Timer? = null
+
+    /**
+     * 経過時間
+     */
+
+    private var time = 0
+
+    /**
+     * ゲームパネルのコンストラクタ
+     */
 
     init {
 
-        this.preferredSize = Dimension(screenWidth, screenHeight)
+        try {
 
-        setBackground(Color.BLACK)
+            super.setPreferredSize(Dimension(screenWidth, screenHeight))
 
-        val jl = JLabel("RPG")
+            super.setLayout(null)
 
-        jl.setFont(Font(Font.MONOSPACED, Font.BOLD, 20))
+            keyPressTbl = BooleanArray(256)
 
-        jl.setForeground(Color.WHITE)
+            imageShips = arrayOfNulls(3)
 
-        add(jl)
+            // キー押下状態のテーブルの初期化
 
-        player.getPlayerImage()
+            keyPressTbl = BooleanArray(256)
 
-        addKeyListener(keyHandler)
+            val is0 = this::class.java.getResourceAsStream("images/frame_01.png")
 
-    }
+            if (is0 != null) {
 
-    override fun processKeyEvent(e: KeyEvent) {
+                imageShips!![0] = ImageIO.read(is0)
 
-        player.move(e.keyCode)
+                is0.close()
+            }
 
-        playerHP--
+            val is1 = this::class.java.getResourceAsStream("images/frame_06.png")
 
-        if (playerHP <= 0) {
+            if (is1 != null) {
 
+                imageShips!![1] = ImageIO.read(is1)
+
+                is1.close()
+            }
+
+            val is2 = this::class.java.getResourceAsStream("images/frame_03.png")
+
+            if (is2 != null) {
+
+                imageShips!![2] = ImageIO.read(is2)
+
+                is2.close()
+            }
+
+            keyAdapter = MGKeyAdapter()
+
+            addKeyListener(keyAdapter)
+
+            timerThis = Timer()
+
+            timerThis!!.scheduleAtFixedRate(TimerActionListener(), 1000L, 8L)
+
+            init()
+
+        } catch (e: IOException) {
+
+            e.printStackTrace()
 
         }
-
-        repaint()
     }
 
+    /**
+     * ゲームの初期化
+     */
 
-    override fun paintComponent(graphics: Graphics) {
+    fun init() {
 
-        super.paintComponent(graphics)
+        time = 0
 
-        requestFocusInWindow()
+        x = 384
 
-        val graphics2D = graphics as Graphics2D
+        y = 640
+    }
 
-        graphics2D.color = Color.ORANGE
+    /**
+     * ゲームの実行
+     */
 
-        graphics2D.fillRect(100, 100, 500, 300)
+    fun run() {
 
-        graphics2D.drawImage(player.getDrawPlayer(), player.getPlayerX(), player.getPlayerY(), null)
+        time++
 
-        graphics2D.color = Color(0, 0, 0, 200)
+        if (time % 6 == 0) {
 
-        graphics2D.fillRoundRect(0, 0, 960, 50, 0, 0)
+            playerDirection = 0
 
-        // RGBの白色の番号
-        graphics2D.color = Color(255, 255, 255)
+            if (isKeyCodePressed(KeyEvent.VK_A)) {
 
-        graphics2D.setColor(graphics2D.color)
+                playerDirection = 2
 
-        graphics2D.setStroke(BasicStroke(5f))
+                pShift = 4
 
-        graphics2D.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25)
+                mx = mx - 1
+            }
 
-        graphics2D.color = Color.WHITE
+            if (isKeyCodePressed(KeyEvent.VK_D)) {
 
-        graphics2D.font = graphics2D.getFont().deriveFont(Font.PLAIN, 23f)
+                playerDirection = 1
 
-        graphics2D.drawString("HP$playerHP", 36, 36)
+                pShift = 6
+
+                mx = mx + 1
+            }
+        }
+        if (time % 2 == 0) {
+
+            x = x + mx
+
+            if (x < 0) {
+
+                x = 0
+
+                mx = 0
+
+            } else if (x > width - 32) {
+
+                x = width - 32
+
+                mx = 0
+            }
+
+        } else {
+
+            repaint()
+        }
+    }
+
+    /**
+     * 画面描画
+     */
+
+    override fun paint(g: Graphics) {
+
+        g.color = Color.black
+
+        g.fillRect(0, 0, 800, 800)
+
+        g.drawImage(imageShips!![playerDirection], x, y, 25, 42, this)
+
+        val sx = 0
+
+        var sy = 0
+
+        val picSize = 32
+
+        if (pShift == 8) sy = 148
+
+        if (pShift == 2) sy = 0
+
+        if (pShift == 4) sy = 48
+
+        if (pShift == 6) sy = 96
+
+        g.drawImage(
+
+            playerGra, x, y - 16, x + picSize, y + picSize, sx,
+
+            sy, sx + picSize, sy + picSize + 16, null
+        )
+    }
+
+    /**
+     * キーコードが押されているかどうかを返す
+     */
+
+    fun isKeyCodePressed(keyCode: Int): Boolean {
+
+        return keyPressTbl!![keyCode]
+    }
+
+    /**
+     * キー入力を処理するアダプタークラス
+     */
+
+    private inner class MGKeyAdapter : KeyAdapter() {
+
+        override fun keyPressed(ke: KeyEvent) {
+
+            val code = ke.keyCode
+
+            if (code < 256) {
+
+                keyPressTbl!![code] = true
+            }
+        }
+
+        override fun keyReleased(ke: KeyEvent) {
+
+            val code = ke.keyCode
+
+            if (code < 256) {
+
+                keyPressTbl!![code] = false
+            }
+        }
+    }
+
+    /**
+     * タイマータスククラス
+     */
+
+    private inner class TimerActionListener : TimerTask() {
+
+        override fun run() {
+
+            this@GamePanel.run()
+        }
     }
 }
