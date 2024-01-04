@@ -62,7 +62,9 @@ class GamePanel : JPanel() {
      * 速度
      */
 
-    private var mx = 0
+    private var speedX = 0
+
+    private var speedY = 0
 
     /**
      * キャラクターの画像
@@ -78,7 +80,7 @@ class GamePanel : JPanel() {
 
     var playerGra: BufferedImage? = null
 
-    var pShift = 0
+    var playerShift = 0
 
     /**
      * タイマー
@@ -181,42 +183,70 @@ class GamePanel : JPanel() {
 
             playerDirection = 0
 
+            if (isKeyCodePressed(KeyEvent.VK_W)) {
+
+                playerShift = 8
+
+                speedY--
+            }
+
+            if (isKeyCodePressed(KeyEvent.VK_S)) {
+
+                playerShift = 2
+
+                speedY++
+            }
+
             if (isKeyCodePressed(KeyEvent.VK_A)) {
 
                 playerDirection = 2
 
-                pShift = 4
+                playerShift = 4
 
-                mx = mx - 1
+                speedX = speedX - 1
             }
 
             if (isKeyCodePressed(KeyEvent.VK_D)) {
 
                 playerDirection = 1
 
-                pShift = 6
+                playerShift = 6
 
-                mx = mx + 1
+                speedX = speedX + 1
             }
         }
+
         if (time % 2 == 0) {
 
-            x = x + mx
+            x = x + speedX
+
+            y += speedY
 
             if (x < 0) {
 
                 x = 0
 
-                mx = 0
+                speedX = 0
 
             } else if (x > width - 32) {
 
                 x = width - 32
 
-                mx = 0
+                speedX = 0
             }
 
-        } else {
+            if (y < 0) {
+
+                y = 0
+
+                speedY = 0
+
+            } else if (y > height - 32) {
+
+                y = height - 32
+
+                speedY = 0
+            }
 
             repaint()
         }
@@ -240,13 +270,13 @@ class GamePanel : JPanel() {
 
         val picSize = 32
 
-        if (pShift == 8) sy = 148
+        if (playerShift == 8) sy = 148
 
-        if (pShift == 2) sy = 0
+        if (playerShift == 2) sy = 0
 
-        if (pShift == 4) sy = 48
+        if (playerShift == 4) sy = 48
 
-        if (pShift == 6) sy = 96
+        if (playerShift == 6) sy = 96
 
         g.drawImage(
 
