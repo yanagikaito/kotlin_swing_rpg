@@ -1,3 +1,4 @@
+import main.GamePanel
 import java.awt.BorderLayout
 import javax.swing.JFrame
 
