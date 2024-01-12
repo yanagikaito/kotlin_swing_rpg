@@ -22,6 +22,14 @@ class GamePanel : JPanel() {
 
     private val maxScreenCol = 12
 
+    /**
+     * Col 列　Row　行
+     */
+
+    private val maxWorldMapCol = 50
+
+    private val maxWorldMapRow = 50
+
     private val screenWidth = tileSize * maxScreenRow
 
     private val screenHeight: Int = tileSize * maxScreenCol
@@ -74,8 +82,38 @@ class GamePanel : JPanel() {
 
         g.fillRect(100, 100, 500, 300)
 
-        player.draw(g)
-
         tile.draw(g)
+
+        player.draw(g)
+    }
+
+    fun getTileSize(): Int {
+
+        return tileSize - originalTileSize
+    }
+
+    fun getPlayer(): Player {
+
+        return player
+    }
+
+    fun getMaxScreenRow(): Int {
+
+        return maxScreenRow
+    }
+
+    fun getMaxScreenCol(): Int {
+
+        return maxScreenCol
+    }
+
+    fun getMaxWorldMapCol(): Int {
+
+        return maxWorldMapCol
+    }
+
+    fun getMaxWorldMapRow(): Int {
+
+        return maxWorldMapRow
     }
 }
