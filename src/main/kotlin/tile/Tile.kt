@@ -34,6 +34,7 @@ class Tile(private var gamePanel: GamePanel) {
                 )
             )
 
+
         } catch (e: IOException) {
 
             e.printStackTrace()
@@ -44,8 +45,36 @@ class Tile(private var gamePanel: GamePanel) {
 
     fun draw(g: Graphics) {
 
-        g.drawImage(getDrawTile(), getTileX(), getTileY(), null)
+        var worldCol = 0
+        var worldRow = 0
+
+        while (worldCol < gamePanel.getMaxWorldMapCol() && worldRow < gamePanel.getMaxWorldMapRow()) {
+
+            val worldX: Int = worldCol * gamePanel.getTileSize()
+            val worldY: Int = worldRow * gamePanel.getTileSize()
+
+            val screenX: Int = worldX
+            val screenY: Int = worldY
+
+            g.drawImage(
+                drawTile,
+                screenX,
+                screenY,
+                gamePanel.getTileSize(),
+                gamePanel.getTileSize(),
+                null
+            )
+            worldCol++
+
+            if (worldCol == gamePanel.getMaxWorldMapCol()) {
+                worldCol = 0
+
+                worldRow++
+
+            }
+        }
     }
+
 
     fun getTileX(): Int {
 

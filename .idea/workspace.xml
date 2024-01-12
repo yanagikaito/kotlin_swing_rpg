@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc4c8357-7c10-474d-943d-c75e4416caf0" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/tile/Tile.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/tiles/prairie.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/gamemain/GamePanel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/gamemain/GamePanel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/player/Player.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/player/Player.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/gamemain/Gamemain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/gamemain/Gamemain.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/tile/Tile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/tile/Tile.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

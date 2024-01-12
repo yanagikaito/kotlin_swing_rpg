@@ -3,6 +3,7 @@ package main
 import javax.swing.JFrame
 
 object GameMain {
+
     @JvmStatic
     fun main(args: Array<String>) {
 
