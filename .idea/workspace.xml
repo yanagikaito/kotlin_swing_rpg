@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc4c8357-7c10-474d-943d-c75e4416caf0" name="変更" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/tile/Tile.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/tiles/prairie.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/main/GameFrame.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/gamemain/GameFrame.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/main/GamePanel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/gamemain/GamePanel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/main/Gamemain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/gamemain/Gamemain.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/tile/Tile.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/gamemain/GamePanel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/gamemain/GamePanel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/player/Player.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/player/Player.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,11 +47,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\meteo\IdeaProjects\Kotlin_2D_rpg\src\main\resources\tiles" />
       <recent name="C:\Users\meteo\IdeaProjects\Kotlin_2D_rpg\src\main\kotlin" />
       <recent name="C:\Users\meteo\IdeaProjects\Kotlin_2D_rpg\src\main\kotlin\gamemain" />
       <recent name="C:\Users\meteo\IdeaProjects\Kotlin_2D_rpg\src\main\resources\images" />
       <recent name="C:\Users\meteo\IdeaProjects\Kotlin_2D_rpg\src\main\kotlin\main" />
-      <recent name="C:\Users\meteo\IdeaProjects\Kotlin_2D_rpg\res" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="アプリケーションレベル" UseSingleDictionary="true" transferred="true" />

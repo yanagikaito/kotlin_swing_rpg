@@ -31,8 +31,6 @@ class Player(private var gamePanel: GamePanel) {
                 )
             )
 
-            setDrawPlayer(getDrawPlayer().getSubimage(0, 0, 32, 32))
-
         } catch (e: IOException) {
 
             e.printStackTrace()
