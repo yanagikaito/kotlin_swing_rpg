@@ -1,6 +1,7 @@
 package main
 
 import player.Player
+import tile.Tile
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Font
@@ -26,6 +27,8 @@ class GamePanel : JPanel() {
     private val screenHeight: Int = tileSize * maxScreenCol
 
     private val player = Player(this)
+
+    private val tile = Tile(this)
 
     init {
 
@@ -72,5 +75,7 @@ class GamePanel : JPanel() {
         g.fillRect(100, 100, 500, 300)
 
         player.draw(g)
+
+        tile.draw(g)
     }
 }
