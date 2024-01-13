@@ -78,6 +78,20 @@ class GamePanel : JPanel() {
 
         requestFocusInWindow()
 
+        /**
+         * デバッグ
+         */
+
+        val drawStart = 0
+        if (player.checkDrawTime) {
+
+            var drawStart: Long = System.nanoTime()
+            if (player.showDebugText) {
+                drawStart = System.nanoTime()
+            }
+
+        }
+
         g.color = Color.ORANGE
 
         g.fillRect(100, 100, 500, 300)
@@ -85,6 +99,56 @@ class GamePanel : JPanel() {
         tile.draw(g)
 
         player.draw(g)
+
+        if (player.showDebugText) {
+
+            val drawEnd: Long = System.nanoTime()
+
+            val passed: Long = drawEnd - drawStart
+
+            g.font = Font("アリアル", Font.PLAIN, 20)
+
+            g.color = Color.WHITE
+
+            val x = 10
+
+            var y = 400
+
+            val lineHeight = 20
+
+            g.drawString("WorldX" + player.getPlayerX(), x, y)
+
+            y += lineHeight
+
+            g.drawString("WorldY" + player.getPlayerY(), x, y)
+
+            y += lineHeight
+
+            g.drawString(
+                "Col" + (player.getPlayerX() / getTileSize()), x, y
+            )
+
+            y += lineHeight
+
+            g.drawString(
+                "Row" + (player.getPlayerY() / getTileSize()), x, y
+            )
+
+            y += lineHeight
+
+            g.drawString("Draw Time: $passed", x, y)
+
+            println("Draw Time: " + passed / 1000000000)
+
+            /**
+             * dispose
+             *
+             * リソースを節約するため
+             */
+
+            g.dispose()
+
+        }
     }
 
     fun getTileSize(): Int {

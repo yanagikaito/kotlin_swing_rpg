@@ -15,6 +15,10 @@ class Player(private var gamePanel: GamePanel) {
 
     private var playerY: Int = 0
 
+    var checkDrawTime = false
+
+    var showDebugText = false
+
     init {
 
         this.gamePanel = gamePanel
@@ -58,6 +62,23 @@ class Player(private var gamePanel: GamePanel) {
 
             setPlayerY(getPlayerY() + 32)
 
+        }
+
+        /**
+         * デバッグ
+         */
+
+        if (kc == KeyEvent.VK_T) {
+
+            if (!showDebugText) {
+
+                showDebugText = true
+
+            } else if (showDebugText) {
+
+                showDebugText = false
+
+            }
         }
     }
 
